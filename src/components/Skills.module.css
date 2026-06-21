@@ -152,16 +152,51 @@
 /* Responsive CSS */
 @media (max-width: 600px) {
   .tabContainer {
-    flex-direction: column;
-    align-items: stretch;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 10px;
   }
   
   .tabBtn {
-    justify-content: center;
+    padding: 10px 16px;
+    font-size: 0.9rem;
   }
   
   .title {
     font-size: 2.2rem;
+  }
+
+  .skillsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .skillCard {
+    padding: 16px 12px;
+    gap: 12px;
+  }
+
+  .skillHeader {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+  }
+
+  .skillName {
+    text-align: center;
+    font-size: 0.95rem;
+    flex-grow: 0;
+  }
+
+  .iconWrapper {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .iconWrapper svg {
+    width: 18px;
+    height: 18px;
   }
 }
