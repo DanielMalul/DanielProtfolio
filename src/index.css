@@ -11,23 +11,23 @@
   --border-color-hover: rgba(139, 92, 246, 0.3);
   ----------------------------------- */
 
-  /* NVIDIA & INTEL COMBINED THEME */
-  --bg-primary: #080a0f; /* Deep Dark Space */
-  --bg-secondary: #10141d; /* Slightly lighter dark */
-  --bg-card: rgba(16, 20, 29, 0.75);
-  --bg-card-hover: rgba(22, 28, 41, 0.85);
+  /* YELLOW & BLUE THEME */
+  --bg-primary: #0a0e17; /* Deep Navy Blue */
+  --bg-secondary: #121826; 
+  --bg-card: rgba(18, 24, 38, 0.75);
+  --bg-card-hover: rgba(26, 35, 51, 0.85);
   
-  --accent-primary: #0071c5; /* Intel Blue */
-  --accent-secondary: #76b900; /* NVIDIA Green */
-  --accent-success: #76b900; /* NVIDIA Green */
-  --accent-glow: rgba(0, 113, 197, 0.15); /* Blue Glow */
+  --accent-primary: #3b82f6; /* Bright Blue */
+  --accent-secondary: #eab308; /* Vibrant Yellow */
+  --accent-success: #eab308; /* Yellow */
+  --accent-glow: rgba(234, 179, 8, 0.15); /* Yellow Glow */
   
   --text-primary: #f3f4f6;
   --text-secondary: #9ca3af;
   --text-muted: #6b7280;
   
   --border-color: rgba(255, 255, 255, 0.08);
-  --border-color-hover: rgba(0, 113, 197, 0.3);
+  --border-color-hover: rgba(234, 179, 8, 0.3);
   
   --font-heading: 'Rubik', sans-serif;
   --font-body: 'Heebo', sans-serif;
@@ -56,9 +56,9 @@ body {
   min-height: 100vh;
   position: relative;
   background-image: 
-    radial-gradient(at 0% 0%, rgba(0, 113, 197, 0.08) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(118, 185, 0, 0.08) 0px, transparent 50%),
-    radial-gradient(at 50% 50%, rgba(11, 15, 22, 1) 0px, var(--bg-primary) 100%);
+    radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.08) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(234, 179, 8, 0.08) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, rgba(18, 24, 38, 1) 0px, var(--bg-primary) 100%);
   background-attachment: fixed;
 }
 
@@ -133,13 +133,13 @@ button, input, textarea {
   align-items: center;
   gap: 8px;
   padding: 12px 28px;
-  background: linear-gradient(135deg, var(--accent-primary), rgba(0, 113, 197, 0.8));
+  background: linear-gradient(135deg, var(--accent-primary), rgba(59, 130, 246, 0.8));
   color: #fff;
   font-weight: 600;
   border-radius: 10px;
   border: none;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0, 113, 197, 0.4);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
   transition: all var(--transition-normal);
   z-index: 1;
 }
@@ -160,7 +160,7 @@ button, input, textarea {
 
 .glow-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 113, 197, 0.6);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
 }
 
 .glow-btn:hover::before {

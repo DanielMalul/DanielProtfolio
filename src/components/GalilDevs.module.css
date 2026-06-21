@@ -139,7 +139,7 @@
   transform: translate(-50%, -50%);
   width: 120%;
   height: 120%;
-  background: radial-gradient(circle, rgba(118, 185, 0, 0.15) 0%, transparent 60%);
+  background: radial-gradient(circle, rgba(234, 179, 8, 0.15) 0%, transparent 60%);
   z-index: -1;
   pointer-events: none;
   filter: blur(20px);
@@ -203,8 +203,8 @@
   width: 42px;
   height: 42px;
   border-radius: 10px;
-  background: rgba(118, 185, 0, 0.08);
-  border: 1px solid rgba(118, 185, 0, 0.15);
+  background: rgba(234, 179, 8, 0.08);
+  border: 1px solid rgba(234, 179, 8, 0.15);
   color: var(--accent-secondary);
   flex-shrink: 0;
 }

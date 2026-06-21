@@ -88,8 +88,8 @@
   width: 46px;
   height: 46px;
   border-radius: 10px;
-  background: rgba(0, 113, 197, 0.08);
-  border: 1px solid rgba(0, 113, 197, 0.15);
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.15);
   color: var(--accent-primary);
   flex-shrink: 0;
 }

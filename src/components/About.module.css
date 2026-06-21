@@ -83,8 +83,8 @@
   min-width: 52px;
   height: 52px;
   border-radius: 12px;
-  background: rgba(0, 113, 197, 0.1);
-  border: 1px solid rgba(0, 113, 197, 0.15);
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.15);
   color: var(--accent-primary);
   transition: all var(--transition-normal);
 }
