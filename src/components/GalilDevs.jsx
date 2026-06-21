@@ -57,7 +57,7 @@ export default function GalilDevs() {
                 <div className={styles.mockupTitle}>galildevs.com</div>
               </div>
               <div className={styles.mockupBody}>
-                <Laptop className={styles.mockupIcon} size={48} />
+                <Laptop className={styles.mockupIcon} size={36} />
                 <h4 className={styles.mockupText}>GalilDevs — פיתוח תוכנה פרימיום</h4>
                 <p className={styles.mockupSubtext}>שני הנדסאי תוכנה מהגליל בונים פתרונות דיגיטליים שמייצרים תוצאות.</p>
                 <div className={styles.mockupStats}>
@@ -84,7 +84,7 @@ export default function GalilDevs() {
                 <div className={styles.mockupTitle}>perfume-trades.com</div>
               </div>
               <div className={styles.mockupBody}>
-                <ShoppingBag className={`${styles.mockupIcon} ${styles.iconGold}`} size={48} />
+                <ShoppingBag className={`${styles.mockupIcon} ${styles.iconGold}`} size={36} />
                 <h4 className={styles.mockupText}>Perfume Trades</h4>
                 <p className={styles.mockupSubtext}>
                   פלטפורמת מסחר חברתית לבשמים. קנייה, מכירה והחלפה באפליקציה מהירה ומאובטחת.
