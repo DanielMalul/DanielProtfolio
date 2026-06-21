@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Contact.module.css';
-import { Mail, MapPin, Phone } from 'lucide-react';
+import { Mail, MapPin, Phone, Linkedin } from 'lucide-react';
 
 const WhatsAppIcon = (props) => (
   <svg 
@@ -68,6 +68,16 @@ export default function Contact() {
                 <div className={styles.detailText}>
                   <span className={styles.detailLabel}>טלפון</span>
                   <a href="tel:0549069447" className={styles.detailValue}>054-906-9447</a>
+                </div>
+              </div>
+
+              <div className={styles.detailItem}>
+                <div className={styles.detailIconWrapper}>
+                  <Linkedin size={20} />
+                </div>
+                <div className={styles.detailText}>
+                  <span className={styles.detailLabel}>לינקדין</span>
+                  <a href="https://www.linkedin.com/in/daniel-malul-914114338/" target="_blank" rel="noopener noreferrer" className={styles.detailValue}>Daniel Malul</a>
                 </div>
               </div>
             </div>

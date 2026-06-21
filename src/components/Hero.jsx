@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Hero.module.css';
 import { useTransparentImg } from '../utils/removeBackground';
 import hoodieSrc from '../assets/daniel_hoodie.png';
-import { MessageSquare, Award, Terminal } from 'lucide-react';
+import { MessageSquare, Award, Terminal, Linkedin } from 'lucide-react';
 
 export default function Hero() {
   // Remove white background seamlessly
@@ -41,6 +41,16 @@ export default function Hero() {
             <a href="#about" className={styles.secondaryBtn}>
               <span>מידע נוסף אודותיי</span>
               <Award size={18} />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/daniel-malul-914114338/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.secondaryBtn}
+              style={{ padding: '12px 16px' }}
+              aria-label="LinkedIn"
+            >
+              <Linkedin size={20} />
             </a>
           </div>
         </div>
