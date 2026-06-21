@@ -132,9 +132,10 @@
   animation: charFloat 3.2s ease-in-out infinite;
 }
 
-.charKick {
-  /* No float during kicking to ground him, but maybe a slight lean */
-  animation: charLean 2s ease-in-out infinite;
+.charBouncing {
+  /* This creates a live juggling/bouncing feel for the entire avatar image */
+  animation: juggleBounce 0.6s cubic-bezier(0.28, 0.84, 0.42, 1) infinite alternate;
+  filter: drop-shadow(0 0 35px rgba(255, 215, 0, 0.35));
 }
 
 @keyframes charFloat {
@@ -142,51 +143,12 @@
   50%       { transform: translateX(-50%) translateY(-14px); }
 }
 
-@keyframes charLean {
-  0%, 100% { transform: translateX(-50%) rotate(0deg); }
-  50%       { transform: translateX(-50%) rotate(-1.5deg); }
+@keyframes juggleBounce {
+  0% { transform: translateX(-50%) translateY(0) scaleY(0.98); }
+  100% { transform: translateX(-50%) translateY(-24px) scaleY(1.02); }
 }
 
-/* ── Soccer Ball ── */
-.ballWrapper {
-  position: absolute;
-  bottom: 0;   /* anchor point — physics handles Y translate */
-  left: 50%;
-  opacity: 0;     /* JS controls opacity */
-  pointer-events: none;
-  transform: translate(-50%, 0);
-  z-index: 10;
-}
 
-.ballIcon {
-  font-size: 2.8rem;
-  line-height: 1;
-  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.4));
-  /* Spin via CSS */
-  animation: ballSpin 0.9s linear infinite;
-}
-
-@keyframes ballSpin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-
-/* Ball ground shadow */
-.ballShadow {
-  position: absolute;
-  bottom: -15px; /* adjust based on stage */
-  left: 50%;
-  width: 80px;
-  height: 24px;
-  background: radial-gradient(ellipse, rgba(0,0,0,0.6) 0%, transparent 70%);
-  border-radius: 50%;
-  transform: translateX(-50%) scale(1);
-  opacity: 0;
-  pointer-events: none;
-  filter: blur(5px);
-}
-
-/* ── Floor glow ── */
 .floorGlow {
   position: absolute;
   bottom: -20px;
