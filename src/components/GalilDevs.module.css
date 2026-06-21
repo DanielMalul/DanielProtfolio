@@ -378,3 +378,24 @@
     margin: 60px 0;
   }
 }
+
+@media (max-width: 600px) {
+  .graphicSide {
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 20px;
+    justify-content: flex-start;
+    gap: 16px;
+    width: 100%;
+    scrollbar-width: none;
+  }
+  .graphicSide::-webkit-scrollbar {
+    display: none;
+  }
+  .mockupContainer {
+    min-width: 280px;
+    scroll-snap-align: center;
+    flex-shrink: 0;
+  }
+}
