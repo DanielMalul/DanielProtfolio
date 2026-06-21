@@ -382,20 +382,67 @@
 @media (max-width: 600px) {
   .graphicSide {
     flex-direction: row;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding-bottom: 20px;
-    justify-content: flex-start;
-    gap: 16px;
+    justify-content: space-between;
+    gap: 8px;
     width: 100%;
-    scrollbar-width: none;
-  }
-  .graphicSide::-webkit-scrollbar {
-    display: none;
   }
   .mockupContainer {
-    min-width: 280px;
-    scroll-snap-align: center;
-    flex-shrink: 0;
+    width: 48%;
+    min-width: 0;
+    border-radius: 8px;
+  }
+  .mockupHeader {
+    padding: 4px 6px;
+  }
+  .mockupTitle {
+    font-size: 0.55rem;
+  }
+  .dots span {
+    width: 5px; height: 5px;
+  }
+  .mockupBody {
+    padding: 12px 8px;
+    gap: 6px;
+  }
+  .mockupIcon {
+    transform: scale(0.65);
+    margin-bottom: -6px;
+  }
+  .mockupText {
+    font-size: 0.75rem;
+  }
+  .mockupSubtext {
+    font-size: 0.6rem;
+    line-height: 1.2;
+    display: none; /* Hide subtext on tiny layout for cleanliness */
+  }
+  .mockupStats {
+    gap: 10px;
+    padding-top: 8px;
+    margin-top: 4px;
+  }
+  .statVal {
+    font-size: 0.85rem;
+  }
+  .statLabel {
+    font-size: 0.55rem;
+  }
+  .mockupTech {
+    gap: 4px;
+    margin-top: 8px;
+  }
+  .mockupTech span {
+    font-size: 0.55rem;
+    padding: 2px 4px;
+  }
+  .mockupBtn {
+    padding: 4px 8px;
+    font-size: 0.65rem;
+    margin-top: 8px;
+    gap: 4px;
+  }
+  .mockupBtn svg {
+    width: 10px;
+    height: 10px;
   }
 }
