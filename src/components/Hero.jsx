@@ -1,99 +1,101 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styles from './Hero.module.css';
 import { useTransparentImg } from '../utils/removeBackground';
 import standingSrc from '../assets/daniel_standing.png';
-import soccerSrc   from '../assets/daniel_soccer_anim.png';
-import smilingSrc  from '../assets/daniel_smiling.png';
+import kickingSrc  from '../assets/daniel_kicking.png';
 import { MessageSquare, Award, Terminal } from 'lucide-react';
 
-// ── Ball Physics Engine ─────────────────────────────────────────
+// ─── Real Physics Ball ───────────────────────────────────────────
+// Simulates a bouncing soccer ball with gravity + restitution.
+// Uses requestAnimationFrame for buttery 60fps animation.
 function useBallPhysics(active) {
   const ballRef   = useRef(null);
   const shadowRef = useRef(null);
-  const animId    = useRef(null);
-  const state     = useRef({ y: 0, vy: 0, x: 0, t: 0 });
+  const rafId     = useRef(null);
 
   useEffect(() => {
     if (!active) {
-      cancelAnimationFrame(animId.current);
-      // reset ball off-screen
-      if (ballRef.current)   ballRef.current.style.opacity = '0';
+      cancelAnimationFrame(rafId.current);
+      if (ballRef.current)   ballRef.current.style.opacity   = '0';
       if (shadowRef.current) shadowRef.current.style.opacity = '0';
       return;
     }
 
-    const s = state.current;
-    s.y   = 0;          // px from bottom-anchor
-    s.vy  = -280;       // initial upward velocity (px/s)
-    s.x   = 0;
-    let last = null;
+    // Physics state
+    let posY  = 0;       // px above ground (positive = up)
+    let velY  = 260;     // initial upward kick
+    let posX  = 0;       // lateral drift
+    let t     = 0;
+    let lastTs = null;
 
-    const GRAVITY    = 700;   // px/s²
-    const RESTITUTION = 0.68;
-    const GROUND     = 0;
+    const GRAVITY     = 650;   // px / s²
+    const RESTITUTION = 0.68;  // energy kept on bounce
+    const GROUND      = 0;
+    const MAX_H       = 220;   // for shadow scaling
 
     const tick = (ts) => {
-      const dt = last ? Math.min((ts - last) / 1000, 0.04) : 0.016;
-      last = ts;
+      if (!lastTs) lastTs = ts;
+      const dt = Math.min((ts - lastTs) / 1000, 0.033); // cap at 33ms
+      lastTs = ts;
+      t += dt;
 
-      s.vy += GRAVITY * dt;
-      s.y  += s.vy * dt;
-      s.t  += dt;
-      s.x   = Math.sin(s.t * 2.2) * 22; // gentle side-swing
+      // Update physics
+      velY -= GRAVITY * dt;
+      posY += velY  * dt;
+      posX  = Math.sin(t * 2.1) * 14; // gentle lateral sway
 
-      if (s.y >= GROUND) {
-        s.y  = GROUND;
-        s.vy = -Math.abs(s.vy) * RESTITUTION;
-        if (Math.abs(s.vy) < 60) s.vy = -260 - Math.random() * 80;
+      // Ground collision
+      if (posY <= GROUND) {
+        posY = GROUND;
+        velY = Math.abs(velY) * RESTITUTION;
+        // Re-kick if energy gets too low
+        if (velY < 55) velY = 230 + Math.random() * 70;
       }
 
+      // ── Apply to DOM ──
       if (ballRef.current) {
-        ballRef.current.style.transform = `translate(calc(-50% + ${s.x}px), ${s.y}px)`;
+        // Ball is positioned with bottom: anchor, translateY is negative = up
+        ballRef.current.style.transform = `translate(calc(-50% + ${posX}px), ${-posY}px)`;
         ballRef.current.style.opacity   = '1';
       }
+
       if (shadowRef.current) {
-        const pct   = Math.max(0, 1 - (-s.y) / 240);
-        const scale = 0.2 + pct * 0.8;
-        shadowRef.current.style.transform = `translateX(-50%) scale(${scale})`;
-        shadowRef.current.style.opacity   = String(pct * 0.35);
+        const heightRatio = Math.max(0, 1 - posY / MAX_H);
+        const scale       = 0.15 + heightRatio * 0.85;
+        shadowRef.current.style.transform = `translate(calc(-50% + ${posX}px), 0) scale(${scale})`;
+        shadowRef.current.style.opacity   = String(heightRatio * 0.3);
       }
 
-      animId.current = requestAnimationFrame(tick);
+      rafId.current = requestAnimationFrame(tick);
     };
 
-    animId.current = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(animId.current);
+    rafId.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafId.current);
   }, [active]);
 
   return { ballRef, shadowRef };
 }
 
-// ── Hero Component ──────────────────────────────────────────────
+// ─── Hero Section ────────────────────────────────────────────────
 export default function Hero() {
-  const [mode, setMode] = useState('idle'); // idle | bouncing | smiling
+  // 'idle'  → standing image, no ball
+  // 'kick'  → kicking image + animated ball
+  const [mode, setMode] = useState('idle');
 
-  // Pre-process all 3 images (remove white BG)
+  // Process both images (strip white background via canvas BFS)
   const standingUrl = useTransparentImg(standingSrc);
-  const soccerUrl   = useTransparentImg(soccerSrc);
-  const smilingUrl  = useTransparentImg(smilingSrc);
+  const kickingUrl  = useTransparentImg(kickingSrc);
 
-  const { ballRef, shadowRef } = useBallPhysics(mode === 'bouncing');
+  const { ballRef, shadowRef } = useBallPhysics(mode === 'kick');
 
-  // Auto-start bouncing after 1.2 s
-  useEffect(() => {
-    const t = setTimeout(() => setMode('bouncing'), 1200);
-    return () => clearTimeout(t);
-  }, []);
-
-  const src = mode === 'smiling' ? smilingUrl
-            : mode === 'bouncing' ? soccerUrl
-            : standingUrl;
+  const imgSrc = mode === 'kick' ? (kickingUrl || kickingSrc)
+                                 : (standingUrl || standingSrc);
 
   return (
     <section id="home" className={styles.hero}>
       <div className={styles.container}>
 
-        {/* ── Text side ── */}
+        {/* ── Right: Text ── */}
         <div className={styles.introContent}>
           <div className={styles.badge}>
             <Terminal size={14} className={styles.badgeIcon} />
@@ -126,36 +128,38 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* ── Avatar side ── */}
+        {/* ── Left: Avatar + Physics Ball ── */}
         <div className={styles.avatarWrapper}>
           <div
-            className={styles.avatarStage}
-            onMouseEnter={() => setMode('smiling')}
-            onMouseLeave={() => setMode('bouncing')}
-            onTouchStart={() => setMode(m => m === 'smiling' ? 'bouncing' : 'smiling')}
+            className={styles.stage}
+            onMouseEnter={() => setMode('kick')}
+            onMouseLeave={() => setMode('idle')}
+            onTouchStart={() => setMode(m => m === 'kick' ? 'idle' : 'kick')}
           >
-            {/* Character image */}
+            {/* ── Character Image ── */}
             <img
-              src={src || standingSrc}
-              alt="דניאל מלול - דמות 3D"
-              className={`${styles.charImg} ${mode === 'smiling' ? styles.charSmile : ''}`}
+              src={imgSrc}
+              alt="דניאל מלול"
+              className={`${styles.charImg} ${mode === 'kick' ? styles.charKick : styles.charIdle}`}
               draggable={false}
             />
 
-            {/* Animated soccer ball */}
-            <div ref={ballRef} className={styles.ball} aria-hidden>⚽</div>
+            {/* ── Animated Ball (only in kick mode) ── */}
+            <div ref={ballRef} className={styles.ballWrapper} aria-hidden="true">
+              <div className={styles.ballIcon}>⚽</div>
+            </div>
 
-            {/* Ball ground shadow */}
-            <div ref={shadowRef} className={styles.ballShadow} aria-hidden />
+            {/* ── Ball Ground Shadow ── */}
+            <div ref={shadowRef} className={styles.ballShadow} aria-hidden="true" />
           </div>
 
-          {/* Floor glow ring */}
-          <div className={styles.glowRing} />
+          {/* Floor ambient glow */}
+          <div className={styles.floorGlow} />
         </div>
 
       </div>
 
-      {/* BG decorations */}
+      {/* BG effects */}
       <div className={styles.decorGrid} />
       <div className={styles.decorCircle1} />
       <div className={styles.decorCircle2} />
