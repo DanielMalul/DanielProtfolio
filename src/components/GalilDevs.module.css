@@ -290,52 +290,53 @@
   box-shadow: 0 0 20px rgba(201, 168, 76, 0.2);
 }
 
-/* ── Mobile Mockup ── */
-.mobileMockup {
-  width: 280px;
-  height: auto;
-  min-height: 520px;
-  border-radius: 36px;
-  margin: 0 auto;
-  border: 8px solid #1a1a2e;
-  padding: 0;
+/* ── Perfume Trades Specific Styles (Stacked Card) ── */
+.mockupPerfume {
+  margin-top: 30px;
+}
+
+.iconGold {
+  color: #c9a84c;
+}
+
+.mockupTech {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  gap: 8px;
+  margin-top: 15px;
+  flex-wrap: wrap;
 }
 
-.mobileNotch {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 120px;
-  height: 24px;
-  background: #1a1a2e;
-  border-bottom-left-radius: 16px;
-  border-bottom-right-radius: 16px;
-  z-index: 2;
+.mockupTech span {
+  background: rgba(201, 168, 76, 0.1);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  color: #c9a84c;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
 }
 
-.appIconWrapper {
-  width: 90px;
-  height: 90px;
-  background: linear-gradient(135deg, #dfc67b 0%, #a6842b 100%);
-  border-radius: 24px;
-  display: flex;
+.mockupBtn {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 24px;
-  box-shadow: 0 10px 25px rgba(201, 168, 76, 0.3);
+  gap: 8px;
+  margin-top: 25px;
+  padding: 10px 20px;
+  background: rgba(201, 168, 76, 0.1);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  color: #c9a84c;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
 }
 
-.appIcon {
-  color: #1a1a2e;
-}
-
-.glowDecorPerfume {
-  background: radial-gradient(circle, rgba(201, 168, 76, 0.15) 0%, transparent 60%);
+.mockupBtn:hover {
+  background: rgba(201, 168, 76, 0.2);
+  box-shadow: 0 0 15px rgba(201, 168, 76, 0.2);
+  transform: translateY(-2px);
 }
 
 /* Responsiveness */
@@ -343,10 +344,6 @@
   .grid {
     grid-template-columns: 1fr;
     gap: 50px;
-  }
-  
-  .gridReverse {
-    direction: rtl;
   }
   
   .graphicSide {
@@ -357,10 +354,6 @@
     order: 1;
     align-items: center;
     text-align: center;
-  }
-  
-  .techTags {
-    justify-content: center;
   }
   
   .visitBtn {
@@ -376,10 +369,8 @@
   .iconBox {
     align-self: center;
   }
-  
+
   .projectDivider {
     margin: 60px 0;
   }
 }
-
-

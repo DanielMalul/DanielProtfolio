@@ -72,6 +72,41 @@ export default function GalilDevs() {
                 </div>
               </div>
             </div>
+
+            {/* Project 2: Perfume Trades Card */}
+            <div className={`${styles.mockupContainer} ${styles.mockupPerfume}`}>
+              <div className={styles.mockupHeader}>
+                <div className={styles.dots}>
+                  <span className={styles.dotRed}></span>
+                  <span className={styles.dotYellow}></span>
+                  <span className={styles.dotGreen}></span>
+                </div>
+                <div className={styles.mockupTitle}>perfume-trades.com</div>
+              </div>
+              <div className={styles.mockupBody}>
+                <ShoppingBag className={`${styles.mockupIcon} ${styles.iconGold}`} size={48} />
+                <h4 className={styles.mockupText}>Perfume Trades</h4>
+                <p className={styles.mockupSubtext}>
+                  פלטפורמת מסחר חברתית לבשמים. קנייה, מכירה והחלפה באפליקציה מהירה ומאובטחת.
+                </p>
+                
+                <div className={styles.mockupTech}>
+                  <span>React Native</span>
+                  <span>Firebase</span>
+                  <span>Expo</span>
+                </div>
+
+                <a 
+                  href="https://perfume-trades.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className={styles.mockupBtn}
+                >
+                  <span>לעמוד האפליקציה</span>
+                  <ExternalLink size={14} />
+                </a>
+              </div>
+            </div>
             <div className={styles.glowDecor}></div>
           </div>
 
@@ -105,75 +140,6 @@ export default function GalilDevs() {
               <span>בקרו באתר הרשמי</span>
               <ExternalLink size={16} />
             </a>
-          </div>
-        </div>
-
-        <div className={styles.projectDivider} />
-
-        {/* ─── Project 2: Perfume Trades ─── */}
-        <div className={`${styles.grid} ${styles.gridReverse}`}>
-          {/* Right (Visual order on desktop): Content description */}
-          <div className={styles.contentSide}>
-            <span className={styles.preTitlePerfume}>אפליקציית מובייל</span>
-            <h2 className={styles.title}>Perfume Trades</h2>
-            <p className={styles.leadText}>
-              פלטפורמת מסחר חברתית לבשמים — מקום שבו חובבי בשמים קונים, מוכרים ומחליפים.
-              פרויקט הדגל שפיתחנו באפליקציית מובייל מודרנית מבוססת React Native.
-            </p>
-
-            <div className={styles.techTags}>
-              <span>React Native</span>
-              <span>Expo</span>
-              <span>Firebase</span>
-              <span>TypeScript</span>
-            </div>
-
-            <div className={styles.servicesList}>
-              {perfumeFeatures.map((feature, idx) => (
-                <div key={idx} className={styles.serviceItem}>
-                  <div className={`${styles.iconBox} ${styles.iconBoxPerfume}`}>{feature.icon}</div>
-                  <div className={styles.serviceInfo}>
-                    <h4 className={styles.serviceTitle}>{feature.title}</h4>
-                    <p className={styles.serviceDesc}>{feature.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <a 
-              href="https://perfume-trades.com" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className={`${styles.visitBtn} ${styles.visitBtnPerfume}`}
-            >
-              <span>לעמוד האפליקציה</span>
-              <ExternalLink size={16} />
-            </a>
-          </div>
-
-          {/* Left (Visual order on desktop): Mobile Mockup */}
-          <div className={styles.graphicSide}>
-            <div className={`${styles.mockupContainer} ${styles.mobileMockup}`}>
-              <div className={styles.mobileNotch}></div>
-              <div className={styles.mockupBody}>
-                <div className={styles.appIconWrapper}>
-                  <ShoppingBag className={styles.appIcon} size={42} />
-                </div>
-                <h4 className={styles.mockupText}>Perfume Trades</h4>
-                <p className={styles.mockupSubtext}>Trade Your Signature Scent</p>
-                <div className={styles.mockupStats}>
-                  <div className={styles.stat}>
-                    <span className={styles.statVal} style={{color: '#c9a84c'}}>+10K</span>
-                    <span className={styles.statLabel}>בשמים למכירה</span>
-                  </div>
-                  <div className={styles.stat}>
-                    <span className={styles.statVal} style={{color: '#c9a84c'}}>100%</span>
-                    <span className={styles.statLabel}>אבטחה ומסחר</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className={`${styles.glowDecor} ${styles.glowDecorPerfume}`}></div>
           </div>
         </div>
 
