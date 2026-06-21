@@ -6,10 +6,10 @@ const projects = [
   {
     id: 'galildevs',
     title: 'GalilDevs',
-    subtitle: 'סוכנות פיתוח תוכנה',
+    subtitle: 'פרויקט פיתוח תוכנה',
     url: 'https://galildevs.com',
     displayUrl: 'galildevs.com',
-    description: 'סוכנות בוטיק לפיתוח תוכנה שהקמנו יחד - בניית אתרים, אפליקציות ומערכות ניהול ברמה הגבוהה ביותר. שני הנדסאי תוכנה מהגליל שיוצרים פתרונות דיגיטליים פרימיום.',
+    description: 'פרויקט פיתוח תוכנה שהקמנו יחד - בניית אתרים, אפליקציות ומערכות ניהול ברמה הגבוהה ביותר. שני הנדסאי תוכנה מהגליל שיוצרים פתרונות דיגיטליים פרימיום.',
     tech: ['React', 'Node.js', 'PHP', 'MySQL'],
     icon: <Globe size={28} />,
     accentColor: '#06b6d4',

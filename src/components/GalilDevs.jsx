@@ -111,12 +111,12 @@ export default function GalilDevs() {
           </div>
 
           {/* Left: Content description */}
-          <div className={styles.contentSide}>
-            <span className={styles.preTitle}>הסוכנות שלנו</span>
-            <h2 className={styles.title}>GalilDevs — גליל דבס</h2>
-            <p className={styles.leadText}>
-              יחד עם השותף שלי, הקמנו את GalilDevs — סוכנות בוטיק לפיתוח תוכנה הממוקמת בגליל.
-              אנו מתמחים בבניית אתרים, אפליקציות ומערכות ניהול מתקדמות ברמה הגבוהה ביותר.
+          <div className={styles.textContent}>
+            <span className={styles.preTitle}>הפרויקט הראשי שלי</span>
+            <h3 className={styles.title}>GalilDevs</h3>
+            <p className={styles.description}>
+              יחד עם השותף שלי, בנינו את GalilDevs — הפרויקט הראשי שלי לפיתוח מוצרי תוכנה מורכבים.
+              אנחנו מתמקדים בהפיכת קוד נקי לאפליקציות ומערכות מהירות, מודרניות ומרשימות.
             </p>
 
             <div className={styles.servicesList}>
