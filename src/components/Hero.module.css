@@ -190,10 +190,11 @@
 
 /* ── Responsive ── */
 @media (max-width: 992px) {
+  .hero { padding: 120px 0 40px 0; min-height: auto; }
   .container {
     grid-template-columns: 1fr;
     gap: 30px;
-    padding-top: 20px;
+    padding-top: 0px;
   }
   .introContent {
     align-items: center;
@@ -202,15 +203,20 @@
   }
   .description  { max-width: 100%; }
   .ctaGroup     { justify-content: center; }
-  .avatarWrapper { order: 1; min-height: 400px; }
-  .stage  { height: 400px; max-width: 100%; }
+  .avatarWrapper { order: 1; min-height: 380px; }
+  .stage  { height: 380px; max-width: 100%; }
+  .charImg { max-width: 320px; }
   .title        { font-size: 2.8rem; }
 }
 
 @media (max-width: 480px) {
-  .title       { font-size: 2.2rem; }
-  .description { font-size: 1rem; }
-  .avatarWrapper { min-height: 350px; }
-  .stage { height: 350px; }
-  .charImg     { max-width: 320px; }
+  .hero {
+    padding: 110px 0 40px 0;
+    min-height: auto;
+  }
+  .title       { font-size: 2rem; margin-bottom: 16px; }
+  .description { font-size: 1rem; margin-bottom: 24px; }
+  .avatarWrapper { min-height: 280px; }
+  .stage { height: 280px; }
+  .charImg     { max-width: 250px; }
 }
