@@ -1,47 +1,80 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styles from './Hero.module.css';
-import danielFullBody from '../assets/daniel_full_body.png';
-import danielSoccer from '../assets/daniel_soccer.png';
-import { MessageSquare, Briefcase, Terminal, Award } from 'lucide-react';
+import danielStanding from '../assets/daniel_standing.png';
+import danielSmiling from '../assets/daniel_smiling.png';
+import danielSoccer from '../assets/daniel_soccer_anim.png';
+import { MessageSquare, Award, Terminal } from 'lucide-react';
 
 export default function Hero() {
-  const [isHovered, setIsHovered] = useState(false);
-  const imageRef = useRef(null);
+  const [avatarState, setAvatarState] = useState('idle'); // 'idle', 'bouncing', 'smiling'
+  const [ballPos, setBallPos] = useState({ x: 0, y: 0 });
+  const [isBouncing, setIsBouncing] = useState(false);
+  const ballAnimRef = useRef(null);
+  const bounceTimeoutRef = useRef(null);
 
-  // 3D Parallax Tilt Effect on hover
-  const handleMouseMove = (e) => {
-    const el = imageRef.current;
-    if (!el) return;
+  // Autonomous ball bouncing animation using requestAnimationFrame
+  useEffect(() => {
+    let startTime = null;
+    let animId = null;
 
-    const rect = el.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
+    const bounceBall = (timestamp) => {
+      if (!startTime) startTime = timestamp;
+      const elapsed = (timestamp - startTime) / 1000; // seconds
 
-    // Calculate mouse position relative to center (-0.5 to 0.5)
-    const mouseX = (e.clientX - rect.left) / width - 0.5;
-    const mouseY = (e.clientY - rect.top) / height - 0.5;
+      // Sine wave for horizontal movement, parabola for vertical (bouncing)
+      const x = Math.sin(elapsed * 1.5) * 18; // swing left/right
+      const bounceRaw = Math.abs(Math.sin(elapsed * 3)); // 0 to 1
+      const y = -bounceRaw * 30; // bounce up (negative = up)
 
-    // Calculate rotation angles (max 15 degrees)
-    const rotateX = -mouseY * 20;
-    const rotateY = mouseX * 20;
+      setBallPos({ x, y });
+      animId = requestAnimationFrame(bounceBall);
+    };
 
-    // Set CSS custom properties on the element
-    el.style.setProperty('--rx', `${rotateX}deg`);
-    el.style.setProperty('--ry', `${rotateY}deg`);
-    
-    if (!isHovered) {
-      setIsHovered(true);
+    if (isBouncing) {
+      animId = requestAnimationFrame(bounceBall);
+      ballAnimRef.current = animId;
     }
+
+    return () => {
+      if (animId) cancelAnimationFrame(animId);
+    };
+  }, [isBouncing]);
+
+  // Auto-start bouncing after 1s on load
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsBouncing(true);
+      setAvatarState('bouncing');
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleAvatarClick = () => {
+    // Show smiling state briefly on click
+    setAvatarState('smiling');
+    setIsBouncing(false);
+    clearTimeout(bounceTimeoutRef.current);
+
+    bounceTimeoutRef.current = setTimeout(() => {
+      setAvatarState('bouncing');
+      setIsBouncing(true);
+    }, 1800);
+  };
+
+  const handleMouseEnter = () => {
+    setAvatarState('smiling');
+    setIsBouncing(false);
   };
 
   const handleMouseLeave = () => {
-    const el = imageRef.current;
-    if (!el) return;
+    setAvatarState('bouncing');
+    setIsBouncing(true);
+  };
 
-    // Reset rotation smoothly
-    el.style.setProperty('--rx', '0deg');
-    el.style.setProperty('--ry', '0deg');
-    setIsHovered(false);
+  const getAvatarSrc = () => {
+    if (avatarState === 'smiling') return danielSmiling;
+    if (avatarState === 'bouncing') return danielSoccer;
+    return danielStanding;
   };
 
   return (
@@ -51,20 +84,25 @@ export default function Hero() {
         <div className={styles.introContent}>
           <div className={styles.badge}>
             <Terminal size={14} className={styles.badgeIcon} />
-            <span>הנדסאי תוכנה & מפתח תוכנה</span>
+            <span>הנדסאי תוכנה &amp; מפתח תוכנה</span>
           </div>
-          
+
           <h1 className={styles.title}>
             היי, אני <span className="gradient-text">דניאל</span>
           </h1>
-          
+
           <p className={styles.description}>
             אני בונה פתרונות דיגיטליים מקצה לקצה – מאתרי אינטרנט מתקדמים ועד מערכות ניהול מתקדמות.
             כשותף-מייסד ב-<strong>GalilDevs</strong>, אני שואף להפוך רעיונות מורכבים למוצרים מדהימים ויעילים.
           </p>
 
           <div className={styles.ctaGroup}>
-            <a href="#contact" className="glow-btn">
+            <a
+              href="https://wa.me/972549069447"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="glow-btn"
+            >
               <span>בואו נדבר בוואטסאפ</span>
               <MessageSquare size={18} />
             </a>
@@ -75,35 +113,52 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Left: 3D Full-body Interactive Avatar Area without Card Frame */}
+        {/* Left: Animated Character */}
         <div className={styles.avatarWrapper}>
-          <div 
-            ref={imageRef}
-            className={styles.avatarImageContainer}
-            onMouseMove={handleMouseMove}
-            onMouseEnter={() => setIsHovered(true)}
+          {/* Animated floating glow underneath character */}
+          <div className={styles.characterGlow} />
+
+          {/* The character image - no frame, no card */}
+          <div
+            className={styles.characterContainer}
+            onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            onTouchStart={() => setIsHovered(true)}
-            onTouchEnd={handleMouseLeave}
+            onClick={handleAvatarClick}
+            role="button"
+            aria-label="אוואטר אינטראקטיבי של דניאל"
+            tabIndex={0}
           >
-            <div className={styles.avatarGlow} style={{
-              background: isHovered 
-                ? 'radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 60%)'
-                : 'radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 60%)'
-            }}></div>
-            <img 
-              src={isHovered ? danielSoccer : danielFullBody} 
-              alt="דניאל - אוואטר תלת מימדי" 
-              className={styles.avatarImg} 
+            <img
+              key={avatarState}
+              src={getAvatarSrc()}
+              alt="דניאל - אוואטר 3D"
+              className={`${styles.characterImg} ${styles[avatarState]}`}
             />
+
+            {/* Floating soccer ball - only when bouncing */}
+            {avatarState === 'bouncing' && (
+              <div
+                className={styles.soccerBall}
+                style={{
+                  transform: `translate(${ballPos.x}px, ${ballPos.y}px)`
+                }}
+              >
+                ⚽
+              </div>
+            )}
+
+            {/* Touch/hover hint */}
+            <div className={`${styles.hoverHint} ${avatarState === 'smiling' ? styles.hintHidden : ''}`}>
+              <span>👆 לחץ עליי!</span>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Decorative background grids & circles */}
-      <div className={styles.decorGrid}></div>
-      <div className={styles.decorCircle1}></div>
-      <div className={styles.decorCircle2}></div>
+      {/* Background decorations */}
+      <div className={styles.decorGrid} />
+      <div className={styles.decorCircle1} />
+      <div className={styles.decorCircle2} />
     </section>
   );
 }

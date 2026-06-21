@@ -19,6 +19,7 @@
   align-items: center;
 }
 
+/* ---- Intro Text ---- */
 .introContent {
   display: flex;
   flex-direction: column;
@@ -79,6 +80,7 @@
   border-radius: 10px;
   cursor: pointer;
   transition: all var(--transition-normal);
+  text-decoration: none;
 }
 
 .secondaryBtn:hover {
@@ -87,60 +89,135 @@
   transform: translateY(-2px);
 }
 
-/* Cardless 3D Avatar Styling */
+/* ---- Character Avatar (NO frame, NO card) ---- */
 .avatarWrapper {
   display: flex;
   justify-content: center;
-  align-items: center;
-  perspective: 1000px;
+  align-items: flex-end;
   z-index: 5;
-}
-
-.avatarImageContainer {
   position: relative;
-  width: 100%;
-  max-width: 360px;
-  aspect-ratio: 0.95 / 1.1;
-  transform-style: preserve-3d;
-  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
-  transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1);
-  cursor: pointer;
+  min-height: 520px;
 }
 
-.avatarGlow {
+/* Glowing circle beneath character */
+.characterGlow {
   position: absolute;
-  top: 10%;
-  left: 10%;
-  width: 80%;
-  height: 80%;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 260px;
+  height: 60px;
+  background: radial-gradient(ellipse, rgba(139, 92, 246, 0.35) 0%, transparent 70%);
+  filter: blur(20px);
   border-radius: 50%;
-  filter: blur(50px);
+  animation: glowPulse 2.5s ease-in-out infinite;
   z-index: -1;
-  pointer-events: none;
-  transition: background var(--transition-normal);
 }
 
-.avatarImg {
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.5; transform: translateX(-50%) scaleX(1); }
+  50% { opacity: 1; transform: translateX(-50%) scaleX(1.15); }
+}
+
+/* The clickable character area */
+.characterContainer {
+  position: relative;
+  width: 320px;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* The character image itself - pure, no border, no background */
+.characterImg {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 28px; /* Clean rounded edges */
-  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.5));
-  transition: filter var(--transition-fast);
+  max-width: 320px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
+  animation: characterFloat 3s ease-in-out infinite;
 }
 
-.avatarImageContainer:hover .avatarImg {
-  filter: drop-shadow(0 20px 45px rgba(139, 92, 246, 0.3));
+/* Idle float */
+@keyframes characterFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
 }
 
-/* Background grid and circles */
+/* Bouncing state - slight side-to-side sway */
+.bouncing {
+  animation: characterSway 1.2s ease-in-out infinite;
+  filter: drop-shadow(0 20px 40px rgba(16, 185, 129, 0.3));
+}
+
+@keyframes characterSway {
+  0%, 100% { transform: translateY(-4px) rotate(-1.5deg); }
+  50% { transform: translateY(-14px) rotate(1.5deg); }
+}
+
+/* Smiling state - jump with excitement */
+.smiling {
+  animation: characterJump 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  filter: drop-shadow(0 25px 50px rgba(139, 92, 246, 0.5)) brightness(1.08);
+}
+
+@keyframes characterJump {
+  0% { transform: translateY(0) scale(1); }
+  40% { transform: translateY(-30px) scale(1.05); }
+  70% { transform: translateY(-20px) scale(1.03); }
+  100% { transform: translateY(-20px) scale(1.04); }
+}
+
+/* ---- Animated Soccer Ball ---- */
+.soccerBall {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  font-size: 2.8rem;
+  margin-left: -22px;
+  transition: transform 0.05s linear;
+  animation: ballSpin 0.6s linear infinite;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.4));
+  pointer-events: none;
+  z-index: 10;
+}
+
+@keyframes ballSpin {
+  from { filter: drop-shadow(0 8px 16px rgba(0,0,0,0.4)); }
+  to { filter: drop-shadow(0 8px 16px rgba(16, 185, 129, 0.4)); }
+}
+
+/* ---- Hover Hint ---- */
+.hoverHint {
+  margin-top: 16px;
+  font-size: 0.85rem;
+  color: var(--accent-secondary);
+  opacity: 0.7;
+  animation: hintPulse 2s ease-in-out infinite;
+  transition: opacity 0.3s ease;
+  font-weight: 500;
+}
+
+.hintHidden {
+  opacity: 0;
+}
+
+@keyframes hintPulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+/* ---- Background decorations ---- */
 .decorGrid {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: 
+  background-image:
     linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
   background-size: 50px 50px;
@@ -157,7 +234,7 @@
   left: 5%;
   width: 250px;
   height: 250px;
-  background: radial-gradient(circle, rgba(6, 182, 212, 0.05) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.06) 0%, transparent 70%);
   filter: blur(20px);
   z-index: -1;
   pointer-events: none;
@@ -169,38 +246,39 @@
   right: 15%;
   width: 350px;
   height: 350px;
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.05) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.06) 0%, transparent 70%);
   filter: blur(30px);
   z-index: -1;
   pointer-events: none;
 }
 
-/* Responsiveness */
+/* ---- Responsive ---- */
 @media (max-width: 992px) {
   .container {
     grid-template-columns: 1fr;
-    gap: 50px;
+    gap: 40px;
     padding-top: 20px;
   }
-  
+
   .introContent {
     align-items: center;
     text-align: center;
     order: 2;
   }
-  
+
   .description {
     max-width: 100%;
   }
-  
+
   .ctaGroup {
     justify-content: center;
   }
-  
+
   .avatarWrapper {
     order: 1;
+    min-height: 400px;
   }
-  
+
   .title {
     font-size: 2.8rem;
   }
@@ -210,12 +288,16 @@
   .title {
     font-size: 2.2rem;
   }
-  
+
   .description {
     font-size: 1rem;
   }
-  
-  .avatarImageContainer {
-    max-width: 280px;
+
+  .characterContainer {
+    width: 260px;
+  }
+
+  .characterImg {
+    max-width: 260px;
   }
 }
