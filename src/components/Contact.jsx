@@ -36,8 +36,8 @@ export default function Contact() {
           <div className={styles.infoSide}>
             <h3 className={styles.infoTitle}>בואו נשתף פעולה</h3>
             <p className={styles.infoText}>
-              רוצים לבנות אתר מותאם אישית? צריכים פתרון תוכנה פרימיום לעסק שלכם?
-              אני זמין לשיחה מהירה והתחלת עבודה ישירות בוואטסאפ.
+              מחפשים מפתח תוכנה נלהב לצוות שלכם? פתוחים לשיתופי פעולה מעניינים?
+              אני זמין לשיחה מהירה בוואטסאפ, ואשמח לשוחח על הזדמנויות מקצועיות.
             </p>
 
             <div className={styles.detailsList}>
@@ -82,7 +82,7 @@ export default function Contact() {
               <h3 className={styles.whatsappTitle}>מענה מהיר בוואטסאפ</h3>
               <p className={styles.whatsappText}>
                 לחיצה על הכפתור למטה תפתח שיחה ישירה איתי. 
-                אני זמין לענות על כל שאלה ולתת הערכת מחיר לפרויקט שלכם.
+                אני זמין לענות על שאלות מקצועיות ולדון בהצעות עבודה ומשרות פיתוח.
               </p>
               <a 
                 href={whatsappUrl} 
