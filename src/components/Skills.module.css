@@ -70,14 +70,14 @@
 }
 
 .activeTab {
-  background: linear-gradient(135deg, var(--accent-primary), rgba(139, 92, 246, 0.8));
+  background: linear-gradient(135deg, var(--accent-primary), rgba(0, 113, 197, 0.8));
   border-color: var(--accent-primary);
   color: #fff;
-  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 113, 197, 0.3);
 }
 
 .activeTab:hover {
-  background: linear-gradient(135deg, var(--accent-primary), rgba(139, 92, 246, 0.9));
+  background: linear-gradient(135deg, var(--accent-primary), rgba(0, 113, 197, 0.9));
   color: #fff;
   border-color: var(--accent-primary);
 }
