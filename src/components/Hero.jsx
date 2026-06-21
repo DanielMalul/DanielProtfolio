@@ -49,9 +49,10 @@ export default function Hero() {
         <div className={styles.avatarWrapper}>
           <div className={styles.stage}>
             <img
-              src={hoodieUrl || hoodieSrc}
+              src={hoodieUrl || ''}
               alt="דניאל מלול"
               className={`${styles.charImg} ${styles.charIdle}`}
+              style={{ opacity: hoodieUrl ? 1 : 0, transition: 'opacity 0.4s ease' }}
               draggable={false}
             />
           </div>
