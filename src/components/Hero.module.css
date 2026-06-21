@@ -87,7 +87,7 @@
   transform: translateY(-2px);
 }
 
-/* 3D Interactive Card styling */
+/* Cardless 3D Avatar Styling */
 .avatarWrapper {
   display: flex;
   justify-content: center;
@@ -96,81 +96,41 @@
   z-index: 5;
 }
 
-.avatarCard {
+.avatarImageContainer {
   position: relative;
   width: 100%;
   max-width: 360px;
-  background: rgba(17, 24, 39, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--border-color);
-  border-radius: 24px;
-  padding: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  aspect-ratio: 0.95 / 1.1;
   transform-style: preserve-3d;
   transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
-  transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1), border-color var(--transition-fast), box-shadow var(--transition-fast);
+  transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1);
   cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.avatarCard:hover {
-  border-color: var(--border-color-hover);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 25px var(--accent-glow);
-}
-
-.avatarFrame {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 0.9 / 1;
-  border-radius: 16px;
-  background: linear-gradient(135deg, rgba(15, 21, 38, 0.9), rgba(10, 14, 26, 0.7));
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  overflow: hidden;
-  transform: translateZ(20px); /* 3D pop out effect */
 }
 
 .avatarGlow {
   position: absolute;
-  top: -10%;
-  left: -10%;
-  width: 120%;
-  height: 120%;
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 60%);
-  filter: blur(10px);
-  z-index: 1;
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  filter: blur(50px);
+  z-index: -1;
   pointer-events: none;
+  transition: background var(--transition-normal);
 }
 
 .avatarImg {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 16px;
-  transform: translateZ(10px);
+  border-radius: 28px; /* Clean rounded edges */
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.5));
+  transition: filter var(--transition-fast);
 }
 
-.cardHeader {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  transform: translateZ(30px); /* 3D pop out effect */
-}
-
-.cardTitle {
-  font-size: 1.3rem;
-  color: var(--text-primary);
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
-.cardSubtitle {
-  font-size: 0.85rem;
-  color: var(--accent-secondary);
-  font-weight: 500;
+.avatarImageContainer:hover .avatarImg {
+  filter: drop-shadow(0 20px 45px rgba(139, 92, 246, 0.3));
 }
 
 /* Background grid and circles */
@@ -215,7 +175,7 @@
   pointer-events: none;
 }
 
-/* Responsive CSS */
+/* Responsiveness */
 @media (max-width: 992px) {
   .container {
     grid-template-columns: 1fr;
@@ -255,8 +215,7 @@
     font-size: 1rem;
   }
   
-  .avatarCard {
+  .avatarImageContainer {
     max-width: 280px;
-    padding: 16px;
   }
 }
