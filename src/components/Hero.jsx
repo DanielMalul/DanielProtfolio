@@ -1,86 +1,14 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import styles from './Hero.module.css';
-import danielStanding from '../assets/daniel_standing.png';
-import danielSmiling from '../assets/daniel_smiling.png';
-import danielSoccer from '../assets/daniel_soccer_anim.png';
+import Avatar3D from './Avatar3D';
 import { MessageSquare, Award, Terminal } from 'lucide-react';
 
 export default function Hero() {
-  const [avatarState, setAvatarState] = useState('idle'); // 'idle', 'bouncing', 'smiling'
-  const [ballPos, setBallPos] = useState({ x: 0, y: 0 });
-  const [isBouncing, setIsBouncing] = useState(false);
-  const ballAnimRef = useRef(null);
-  const bounceTimeoutRef = useRef(null);
-
-  // Autonomous ball bouncing animation using requestAnimationFrame
-  useEffect(() => {
-    let startTime = null;
-    let animId = null;
-
-    const bounceBall = (timestamp) => {
-      if (!startTime) startTime = timestamp;
-      const elapsed = (timestamp - startTime) / 1000; // seconds
-
-      // Sine wave for horizontal movement, parabola for vertical (bouncing)
-      const x = Math.sin(elapsed * 1.5) * 18; // swing left/right
-      const bounceRaw = Math.abs(Math.sin(elapsed * 3)); // 0 to 1
-      const y = -bounceRaw * 30; // bounce up (negative = up)
-
-      setBallPos({ x, y });
-      animId = requestAnimationFrame(bounceBall);
-    };
-
-    if (isBouncing) {
-      animId = requestAnimationFrame(bounceBall);
-      ballAnimRef.current = animId;
-    }
-
-    return () => {
-      if (animId) cancelAnimationFrame(animId);
-    };
-  }, [isBouncing]);
-
-  // Auto-start bouncing after 1s on load
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsBouncing(true);
-      setAvatarState('bouncing');
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  const handleAvatarClick = () => {
-    // Show smiling state briefly on click
-    setAvatarState('smiling');
-    setIsBouncing(false);
-    clearTimeout(bounceTimeoutRef.current);
-
-    bounceTimeoutRef.current = setTimeout(() => {
-      setAvatarState('bouncing');
-      setIsBouncing(true);
-    }, 1800);
-  };
-
-  const handleMouseEnter = () => {
-    setAvatarState('smiling');
-    setIsBouncing(false);
-  };
-
-  const handleMouseLeave = () => {
-    setAvatarState('bouncing');
-    setIsBouncing(true);
-  };
-
-  const getAvatarSrc = () => {
-    if (avatarState === 'smiling') return danielSmiling;
-    if (avatarState === 'bouncing') return danielSoccer;
-    return danielStanding;
-  };
-
   return (
     <section id="home" className={styles.hero}>
       <div className={styles.container}>
-        {/* Right: Intro Text */}
+
+        {/* ── Right: Intro Text ── */}
         <div className={styles.introContent}>
           <div className={styles.badge}>
             <Terminal size={14} className={styles.badgeIcon} />
@@ -113,38 +41,12 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Left: Animated Character */}
+        {/* ── Left: 3D Interactive Avatar ── */}
         <div className={styles.avatarWrapper}>
-          {/* Animated floating glow underneath character */}
-          <div className={styles.characterGlow} />
-
-          {/* The character image - no frame, no card */}
-          <div
-            className={styles.characterContainer}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            onClick={handleAvatarClick}
-          >
-            <img
-              key={avatarState}
-              src={getAvatarSrc()}
-              alt="דניאל - אוואטר 3D"
-              className={`${styles.characterImg} ${styles[avatarState]}`}
-            />
-
-            {/* Floating soccer ball - only when bouncing */}
-            {avatarState === 'bouncing' && (
-              <div
-                className={styles.soccerBall}
-                style={{
-                  transform: `translate(${ballPos.x}px, ${ballPos.y}px)`
-                }}
-              >
-                ⚽
-              </div>
-            )}
-          </div>
+          <div className={styles.glowRing} />
+          <Avatar3D className={styles.canvas3d} />
         </div>
+
       </div>
 
       {/* Background decorations */}
