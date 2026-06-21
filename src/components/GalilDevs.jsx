@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './GalilDevs.module.css';
-import { ExternalLink, Layers, ShieldCheck, Zap, Laptop } from 'lucide-react';
+import { ExternalLink, Layers, ShieldCheck, Zap, Laptop, Smartphone, Code2 } from 'lucide-react';
 
 export default function GalilDevs() {
   const services = [
@@ -91,6 +91,46 @@ export default function GalilDevs() {
             </a>
           </div>
         </div>
+
+        {/* ── Sub-projects strip ── */}
+        <div className={styles.subProjectsSection}>
+          <div className={styles.subProjectsHeader}>
+            <span className={styles.subProjectsLabel}>
+              <Code2 size={14} />
+              פרויקטים שפיתחנו
+            </span>
+          </div>
+          <div className={styles.subProjectsGrid}>
+            {/* Project card: Perfume Trades */}
+            <a
+              href="https://perfume-trades.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.subProjectCard}
+            >
+              <div className={styles.subProjectIcon}>
+                <Smartphone size={20} />
+              </div>
+              <div className={styles.subProjectInfo}>
+                <h4 className={styles.subProjectTitle}>Perfume Trades</h4>
+                <p className={styles.subProjectDesc}>
+                  פלטפורמת מסחר חברתית לבשמים — מקום שבו חובבי בשמים קונים, מוכרים ומחליפים. 
+                  אפליקציית React Native מלאה עם מנגנון ביקורות וניהול מוצרים חי.
+                </p>
+                <div className={styles.subProjectTech}>
+                  <span>React Native</span>
+                  <span>Expo</span>
+                  <span>Firebase</span>
+                  <span>TypeScript</span>
+                </div>
+              </div>
+              <div className={styles.subProjectArrow}>
+                <ExternalLink size={16} />
+              </div>
+            </a>
+          </div>
+        </div>
+
       </div>
     </section>
   );

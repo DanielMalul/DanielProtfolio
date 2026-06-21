@@ -136,7 +136,9 @@
   max-width: 320px;
   height: auto;
   object-fit: contain;
-  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));
+  /* Removes white background on dark site */
+  mix-blend-mode: multiply;
+  filter: contrast(1.05) saturate(1.1);
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
   animation: characterFloat 3s ease-in-out infinite;
 }
@@ -150,7 +152,6 @@
 /* Bouncing state - slight side-to-side sway */
 .bouncing {
   animation: characterSway 1.2s ease-in-out infinite;
-  filter: drop-shadow(0 20px 40px rgba(16, 185, 129, 0.3));
 }
 
 @keyframes characterSway {
@@ -161,7 +162,6 @@
 /* Smiling state - jump with excitement */
 .smiling {
   animation: characterJump 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-  filter: drop-shadow(0 25px 50px rgba(139, 92, 246, 0.5)) brightness(1.08);
 }
 
 @keyframes characterJump {
@@ -190,27 +190,7 @@
   to { filter: drop-shadow(0 8px 16px rgba(16, 185, 129, 0.4)); }
 }
 
-/* ---- Hover Hint ---- */
-.hoverHint {
-  margin-top: 16px;
-  font-size: 0.85rem;
-  color: var(--accent-secondary);
-  opacity: 0.7;
-  animation: hintPulse 2s ease-in-out infinite;
-  transition: opacity 0.3s ease;
-  font-weight: 500;
-}
 
-.hintHidden {
-  opacity: 0;
-}
-
-@keyframes hintPulse {
-  0%, 100% { opacity: 0.5; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.05); }
-}
-
-/* ---- Background decorations ---- */
 .decorGrid {
   position: absolute;
   top: 0;

@@ -124,9 +124,6 @@ export default function Hero() {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             onClick={handleAvatarClick}
-            role="button"
-            aria-label="אוואטר אינטראקטיבי של דניאל"
-            tabIndex={0}
           >
             <img
               key={avatarState}
@@ -146,11 +143,6 @@ export default function Hero() {
                 ⚽
               </div>
             )}
-
-            {/* Touch/hover hint */}
-            <div className={`${styles.hoverHint} ${avatarState === 'smiling' ? styles.hintHidden : ''}`}>
-              <span>👆 לחץ עליי!</span>
-            </div>
           </div>
         </div>
       </div>
