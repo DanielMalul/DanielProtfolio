@@ -101,9 +101,8 @@
 .stage {
   position: relative;
   width: 100%;
-  max-width: 380px;
-  height: 520px;
-  cursor: pointer;
+  max-width: 440px;
+  height: 580px;
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -116,7 +115,7 @@
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
-  max-width: 340px;
+  max-width: 420px;
   height: auto;
   object-fit: contain;
   transition: filter 0.3s ease;
@@ -132,20 +131,9 @@
   animation: charFloat 3.2s ease-in-out infinite;
 }
 
-.charBouncing {
-  /* This creates a live juggling/bouncing feel for the entire avatar image */
-  animation: juggleBounce 0.6s cubic-bezier(0.28, 0.84, 0.42, 1) infinite alternate;
-  filter: drop-shadow(0 0 35px rgba(255, 215, 0, 0.35));
-}
-
 @keyframes charFloat {
   0%, 100% { transform: translateX(-50%) translateY(0); }
   50%       { transform: translateX(-50%) translateY(-14px); }
-}
-
-@keyframes juggleBounce {
-  0% { transform: translateX(-50%) translateY(0) scaleY(0.98); }
-  100% { transform: translateX(-50%) translateY(-24px) scaleY(1.02); }
 }
 
 

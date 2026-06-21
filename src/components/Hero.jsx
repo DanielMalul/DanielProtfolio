@@ -1,18 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './Hero.module.css';
 import { useTransparentImg } from '../utils/removeBackground';
-import standingSrc from '../assets/daniel_standing.png';
-import soccerSrc   from '../assets/daniel_soccer_anim.png';
+import hoodieSrc from '../assets/daniel_hoodie.png';
 import { MessageSquare, Award, Terminal } from 'lucide-react';
 
 export default function Hero() {
-  const [isHovered, setIsHovered] = useState(false);
-
   // Remove white background seamlessly
-  const standingUrl = useTransparentImg(standingSrc);
-  const soccerUrl   = useTransparentImg(soccerSrc);
-
-  const imgSrc = isHovered ? (soccerUrl || soccerSrc) : (standingUrl || standingSrc);
+  const hoodieUrl = useTransparentImg(hoodieSrc);
 
   return (
     <section id="home" className={styles.hero}>
@@ -53,17 +47,11 @@ export default function Hero() {
 
         {/* ── Left: Avatar Area ── */}
         <div className={styles.avatarWrapper}>
-          <div
-            className={styles.stage}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-            onTouchStart={() => setIsHovered(!isHovered)}
-          >
+          <div className={styles.stage}>
             <img
-              key={isHovered ? 'soccer' : 'standing'}
-              src={imgSrc}
+              src={hoodieUrl || hoodieSrc}
               alt="דניאל מלול"
-              className={`${styles.charImg} ${isHovered ? styles.charBouncing : styles.charIdle}`}
+              className={`${styles.charImg} ${styles.charIdle}`}
               draggable={false}
             />
           </div>
