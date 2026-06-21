@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './Contact.module.css';
-import { Mail, MapPin, Send, Check } from 'lucide-react';
+import { Mail, MapPin, Send, Check, Phone } from 'lucide-react';
 
 const GithubIcon = (props) => (
   <svg 
@@ -71,7 +71,17 @@ export default function Contact() {
                 </div>
                 <div className={styles.detailText}>
                   <span className={styles.detailLabel}>מיקום</span>
-                  <span className={styles.detailValue}>הגליל, ישראל</span>
+                  <span className={styles.detailValue}>קריית שמונה, ישראל</span>
+                </div>
+              </div>
+
+              <div className={styles.detailItem}>
+                <div className={styles.detailIconWrapper}>
+                  <Phone size={20} />
+                </div>
+                <div className={styles.detailText}>
+                  <span className={styles.detailLabel}>טלפון</span>
+                  <a href="tel:0549069447" className={styles.detailValue}>054-906-9447</a>
                 </div>
               </div>
             </div>

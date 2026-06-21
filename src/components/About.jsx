@@ -45,6 +45,21 @@ export default function About() {
               אני מאמין שקוד הוא לא רק אוסף פקודות, אלא כלי רב עוצמה לעיצוב חוויות משתמש ולהנעת עסקים קדימה. 
               הגישה שלי משלבת בין כתיבת קוד נקי ותחזוקתי לבין עיצוב חזותי בלתי מתפשר.
             </p>
+
+            <div className={styles.personalInfo}>
+              <div className={styles.infoItem}>
+                <span className={styles.infoLabel}>גיל:</span>
+                <span className={styles.infoValue}>21</span>
+              </div>
+              <div className={styles.infoItem}>
+                <span className={styles.infoLabel}>מגורים:</span>
+                <span className={styles.infoValue}>קריית שמונה, ישראל</span>
+              </div>
+              <div className={styles.infoItem}>
+                <span className={styles.infoLabel}>טלפון:</span>
+                <a href="tel:0549069447" className={styles.infoValue}>054-906-9447</a>
+              </div>
+            </div>
           </div>
 
           {/* Left: Highlights Cards */}
