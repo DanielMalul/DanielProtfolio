@@ -47,7 +47,7 @@ export default function Contact() {
                 </div>
                 <div className={styles.detailText}>
                   <span className={styles.detailLabel}>כתבו לי במייל</span>
-                  <a href="mailto:info@galildevs.com" className={styles.detailValue}>info@galildevs.com</a>
+                  <a href="mailto:danielmalul110@gmail.com" className={styles.detailValue}>danielmalul110@gmail.com</a>
                 </div>
               </div>
 

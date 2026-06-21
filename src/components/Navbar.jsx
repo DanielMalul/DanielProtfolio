@@ -23,6 +23,7 @@ export default function Navbar() {
     { name: 'ראשי', href: '#home' },
     { name: 'אודותיי', href: '#about' },
     { name: 'GalilDevs', href: '#galildevs' },
+    { name: 'פרויקטים', href: '#projects' },
     { name: 'כישורים וכלים', href: '#skills' },
     { name: 'צור קשר', href: '#contact' }
   ];
